@@ -1,4 +1,6 @@
-package pl.coderslab.app.calculator;
+package pl.coderslab.calculator;
 
 public class Calculator {
+
+
 }

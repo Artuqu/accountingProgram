@@ -42,14 +42,16 @@
             <td><c:out value="${company.NIP}"/></td>
             <td><c:out value="${company.bankAccount}"/></td>
             <td>
-                <br><a href="http://localhost:8080/admin/invoice/addInvoice${company.id}" style="text-decoration: none">Use</a>
+                <br><a href="http://localhost:8080/invoice/all/${company.id}" style="text-decoration: none">Show all invoice</a>
+                <br><a href="http://localhost:8080/invoice/add/${company.id}" style="text-decoration: none">Add invoice</a>
                 <br><a href="http://localhost:8080/admin/company/edit/${company.id}"
-                       style="text-decoration: none">Edit</a>
-                <br><a href="http://localhost:8080/admin/company/delete/${company.id}" style="text-decoration:none">Delete</a>
+                       style="text-decoration: none">Edit Company</a>
+                <br><a href="http://localhost:8080/admin/company/delete/${company.id}" style="text-decoration:none">Delete Company</a>
 
             </td>
         </tr>
 
+    <link rel="stylesheet" href="../css/style.css">
     </c:forEach>
 
 

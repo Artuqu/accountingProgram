@@ -2,13 +2,14 @@ package pl.coderslab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.entity.Book;
+import pl.coderslab.entity.Company;
 
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
 
+
+@Transactional
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface CompanyRepository extends JpaRepository<Company, Long>{
 
 
 }
