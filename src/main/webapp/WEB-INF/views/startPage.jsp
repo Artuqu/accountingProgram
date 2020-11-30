@@ -8,9 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Count your taxes</title>
 </head>
 <body>
-$END$
+Please select an option:
+<table border="1">
+    <thead>
+    <th><a href="http://localhost:8080/admin/company/add" style="text-decoration:none">Add company</a></th>
+<%--    <th><a href="http://localhost:8080/admin/company/edit/{id}" style="text-decoration:none">Edit company</a></th>--%>
+    <th><a href="http://localhost:8080/admin/company/all" style="text-decoration:none">Show all company</a></th>
+    </thead>
+</table>
+
+
+<link rel="stylesheet" href="../css/style.css">
 </body>
 </html>
