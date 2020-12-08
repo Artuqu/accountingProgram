@@ -18,7 +18,7 @@ import java.util.List;
 
 
 //@SessionScope po co to?
-@Transactional
+
 @Controller
 @RequestMapping("/admin/company")
 public class CompanyController {

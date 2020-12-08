@@ -27,10 +27,16 @@
         <form:errors path="invoiceNumber"/>
     </div>
     <div>
-        <label for="date">Enter new date:</label>
-        <form:input path="date"/>
+        <label for="date" datatype="dd/MM/yyyy">Enter new date:</label>
+        <form:input path="date" type="date"/>
         <form:errors path="date"/>
     </div>
+
+        <div>
+            <label for="invoiceDirection">Select new direction:</label>
+            <form:select path="invoiceDirection" items="${directions}" id="invoiceDirection" itemLabel="direction" itemValue="id"/>
+            <form:errors path="invoiceDirection"/>
+        </div>
 
     <div>
         <label for="amountNetto">Enter new amount netto:</label>
@@ -57,8 +63,8 @@
     </div>
 
 
-    <link rel="stylesheet" href="../css/style.css">
     </form:form>
+        <script type="text/javascript" src="../../js/counting.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script type="text/javascript" src="../../js/counting.js"></script>
+
+
 <%--
   Created by IntelliJ IDEA.
   User: Art
@@ -13,7 +18,7 @@
 </head>
 <body>
 <div>
-    <a href= "http://localhost:8080" style="text-decoration:none">Back to main menu</a>
+    <a href= "http://localhost:8080/admin/company/all" style="text-decoration:none">Back to company list</a>
 </div>
 <br>
 <div>
@@ -41,6 +46,12 @@
         </div>
 
         <div>
+            <label for="invoiceDirection">Select direction of invoice:</label>
+            <form:select path="invoiceDirection" items="${directions}" id="invoiceDirection" itemLabel="direction" itemValue="id"/>
+            <form:errors path="invoiceDirection"/>
+        </div>
+
+        <div>
             <label for="amountNetto">Enter netto amount:</label>
             <form:input path="amountNetto"/>
             <form:errors path="amountNetto"/>
@@ -52,16 +63,16 @@
             <form:errors path="vat"/>
         </div>
 
-        <label for="amountBrutto">This your brutto amount: </label>
+        <label for="amountBrutto">This your brutto amount:</label>
         <form:input path="amountBrutto"/>
         <form:errors path="amountBrutto"/>
 
 
-
-
 </div>
 
-<script type="text/javascript" src="../../js/counting.js"></script>
+
+
+
 
 
 

@@ -14,7 +14,7 @@
 </head>
 <body>
 <div>
-<a href= "http://localhost:8080" style="text-decoration:none">Back to main menu</a>
+<a href= "http://localhost:8080/admin/company/all" style="text-decoration:none">Back to company list</a>
 </div>
 <br>
 Eneter new data:
