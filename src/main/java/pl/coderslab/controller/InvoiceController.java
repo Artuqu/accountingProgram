@@ -5,18 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.SessionScope;
+import pl.coderslab.calculator.Calculator;
 import pl.coderslab.entity.Company;
 import pl.coderslab.entity.Invoice;
+import pl.coderslab.entity.InvoiceDirection;
 import pl.coderslab.entity.Vat;
 import pl.coderslab.repository.CompanyRepository;
+import pl.coderslab.repository.InvoiceDirectionRepository;
 import pl.coderslab.repository.InvoiceRepository;
 import pl.coderslab.repository.VatRepository;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
-@Transactional
+
 @Controller
 //@SessionScope
 @RequestMapping("invoice")
@@ -25,12 +27,16 @@ public class InvoiceController {
     private final CompanyRepository cr;
     private final VatRepository vr;
     private final InvoiceRepository ir;
+    private final InvoiceDirectionRepository idr;
+    private final Calculator c;
 
     @Autowired
-    public InvoiceController(VatRepository vr, InvoiceRepository ir, CompanyRepository cr){
+    public InvoiceController(Calculator c, InvoiceDirectionRepository idr, VatRepository vr, InvoiceRepository ir, CompanyRepository cr){
         this.ir=ir;
         this.vr=vr;
         this.cr=cr;
+        this.idr=idr;
+        this.c=c;
     }
 
     @GetMapping("/all/{id}")
@@ -81,6 +87,13 @@ public class InvoiceController {
     @ModelAttribute("vates")
     public List<Vat> vates(){return vr.findAll();}
 
+    @ModelAttribute("directions")
+    public List<InvoiceDirection> directions(){return idr.findAll();}
+
+//    @ModelAttribute("netto")
+//    public List<Invoice> netto(@PathVariable double amountNetto) {
+//        List<Invoice> netto = ir.findAllAmountNetto(amountNetto) }
+;
     //delete
     @Transactional
     @GetMapping("delete/{id}")
@@ -101,21 +114,44 @@ public class InvoiceController {
 
     @PostMapping("edit")
     public String editInvoice(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
-        if (result.hasErrors()) {
-            return "invoices/editInvoices";
-        }
+//        if (result.hasErrors()) {
+//            return "invoices/editInvoices";
+//        }
         Invoice one = ir.getOne(invoice.getId())
-                .setAmountBrutto(invoice.getAmountBrutto())
                 .setInvoiceNumber(invoice.getInvoiceNumber())
-                .setAmountNetto(invoice.getAmountNetto())
                 .setDate(invoice.getDate())
-                .setVat(invoice.getVat())
-                .setCompany(invoice.getCompany());
+                .setInvoiceDirection(invoice.getInvoiceDirection())
+                .setAmountNetto(invoice.getAmountNetto())
+                .setAmountBrutto(invoice.getAmountBrutto())
+                .setVat(invoice.getVat());
+
 
 
         this.ir.save(one);
         m.addAttribute("invoice", one);
-        return "redirect:all";
+        return "invoices/success";
     }
+
+    //model for selling
+    @ModelAttribute("nettosSell")
+    public List<Invoice> netto(){return c.getAllNettoSell();}
+
+    @ModelAttribute("bruttosSell")
+    public List<Invoice> brutto(){return c.getAllBruttoSell();}
+
+    @ModelAttribute("allVatSell")
+    public List<Invoice> allVates(){return c.getAllVatSell();}
+
+
+//    model for buying
+
+    @ModelAttribute("nettosBuy")
+    public List<Invoice> nettoBuy(){return c.getAllNettoBuy();}
+
+    @ModelAttribute("bruttosBuy")
+    public List<Invoice> bruttoBuy(){return c.getAllBruttoBuy();}
+
+    @ModelAttribute("allVatBuy")
+    public List<Invoice> allVatesBuy(){return c.getAllVatBuy();}
 
 }

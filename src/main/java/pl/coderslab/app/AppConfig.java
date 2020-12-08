@@ -20,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import pl.coderslab.converter.CompanyConverter;
+import pl.coderslab.converter.InvoiceDirectionConverter;
 import pl.coderslab.converter.VatConverter;
 
 
@@ -82,12 +83,18 @@ public class AppConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(companyConverter());
         registry.addConverter(vatConverter());
+        registry.addConverter(invoiceDirectionConverter());
     }
 
 
     @Bean
     public Converter companyConverter() {
         return new CompanyConverter();
+    }
+
+    @Bean
+    public Converter invoiceDirectionConverter() {
+        return new InvoiceDirectionConverter();
     }
 
     @Bean

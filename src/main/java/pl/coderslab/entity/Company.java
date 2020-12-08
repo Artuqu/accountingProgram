@@ -3,10 +3,9 @@ package pl.coderslab.entity;
 
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.pl.NIP;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Proxy(lazy = false)// otwiera sesję i daje dostęp do bazy danych
@@ -20,7 +19,7 @@ public class Company {
 
     @NotBlank(message = "name can't be null!")
     private String name;
-//notnull tylko dla obiektu
+    //notnull tylko dla obiektu
     @NotBlank
     private String address;
 
@@ -32,6 +31,7 @@ public class Company {
     @NIP
     private String NIP;
 
+    @Size(min = 26, max = 26)
     private String bankAccount;
 
 //    @OneToMany(fetch = FetchType.EAGER)// rozwiązanie problemu z brakiem sesji

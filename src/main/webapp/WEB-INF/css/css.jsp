@@ -8,4 +8,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--podać link do tego css do wszystkich innych
 tutaj dodaję tylko link do css--%>
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="style.css">

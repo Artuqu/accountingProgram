@@ -3,10 +3,12 @@ package pl.coderslab.entity;
 
 
 import org.hibernate.annotations.Proxy;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+@Transactional
 @Proxy(lazy = false)
 @Entity
 public class Invoice {
@@ -18,13 +20,19 @@ public class Invoice {
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
+    @NotBlank
     private String invoiceNumber;
 
+    @OneToOne
+    private InvoiceDirection invoiceDirection;
 
+    @NotBlank
     private String date;
+
 
     private double amountNetto;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Vat vat;
 
@@ -99,18 +107,26 @@ public class Invoice {
         return this;
     }
 
+    public InvoiceDirection getInvoiceDirection() {
+        return invoiceDirection;
+    }
+
+    public Invoice setInvoiceDirection(InvoiceDirection invoiceDirection) {
+        this.invoiceDirection = invoiceDirection;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
                 "id=" + id +
                 ", company=" + company +
                 ", invoiceNumber='" + invoiceNumber + '\'' +
+                ", invoiceDirection=" + invoiceDirection +
                 ", date='" + date + '\'' +
                 ", amountNetto=" + amountNetto +
                 ", vat=" + vat +
                 ", amountBrutto=" + amountBrutto +
                 '}';
     }
-
-
 }
